@@ -4,12 +4,11 @@
 
 .navbar-text {
   color: white;
+  padding: 0;
 }
 
-.emailPicker,
-.skisByAttr,
-.welcome {
-  padding-top: 20px;
+.row {
+  padding: 20px;
 }
 
 .ski {

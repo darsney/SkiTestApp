@@ -1,7 +1,18 @@
+var getUrlParameter = (param) => {
+  const queryString = window.location.search;
+  const urlParams = new URLSearchParams(queryString);
+  if (urlParams.has(param)) return urlParams.get(param);
+  else alert("Missing URL Parameter: " + param);
+};
+
 // hardcoded stuff, this is how we load the spreadsheet
-var spreadsheetId = "1vkTGSLJ44tqfqSJ_fSlvtikk3Op8F62OL8zocz5TnJc";
-var sheetName = "Form Responses 1";
+// var spreadsheetId = "1vkTGSLJ44tqfqSJ_fSlvtikk3Op8F62OL8zocz5TnJc";
+// var sheetName = "Form Responses 1";
+// var formUrl = 'https://forms.gle/ckPXVaAiXcZJMYdn6'
 var apiKey = "AIzaSyBY4Wi9SHXWr5kIO4meXu2bkB9zcrKcuFA";
+var spreadsheetId = getUrlParameter("sheetid");
+var sheetName = getUrlParameter("sheetname");
+//file:///Users/matt.darsney/Code/SkiTestApp/index.html?sheetid=1vkTGSLJ44tqfqSJ_fSlvtikk3Op8F62OL8zocz5TnJc&sheetname=Form%20Responses%201&formurl=https://forms.gle/ckPXVaAiXcZJMYdn6
 var url = `https://sheets.googleapis.com/v4/spreadsheets/${spreadsheetId}/values/${sheetName}?alt=json&key=${apiKey}`;
 
 var ViewModel = function () {
@@ -17,6 +28,7 @@ var ViewModel = function () {
   self.skisByAttribute = ko.observable({});
   self.thisUsersSkis = ko.observableArray([]);
   self.initComplete = ko.observable(false);
+  self.formUrl = ko.observable(getUrlParameter("formurl"));
 
   // first things first, load the spreadsheet with a get request
   $.get(url, (sheetData) => {

@@ -16,6 +16,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/knockout.mapping/2.4.1/knockout.mapping.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <link href="https://fonts.cdnfonts.com/css/futura-pt" rel="stylesheet">
+
 
     <!-- actual code we wrote -->
     <script src="site.js" defer></script>
@@ -28,25 +30,38 @@
 
             <nav class="navbar navbar-dark bg-dark row">
                 <span class="navbar-text">
-                    BRO TEH APP TITLE
+                    Line/K2 Ski Test App (Super Beta)
                 </span>
             </nav>
 
-            <div class="row">
-                who tf are you
+            <div class="row welcome">
+                Thanks for rating some skis! If you wanna rate a ski, head to the link here!
+                <a target="_blank" data-bind="attr: {href: formUrl}">Dat google form doe</a>
+            </div>
+
+            <div class="row emailPicker">
+                You can also check out what you rated skis. <br>
+                If you just rated something, make sure to smash the refresh button first if you wanna see it <br><br>
+
+                First of all, who are ya?
                 <select class="form-select"
                     data-bind="options: uniqueEmails, value: selectedEmail, valueAllowUnset: true">
                 </select>
             </div>
 
-            <div data-bind="if: initComplete">
+            <div class="skisByAttr" data-bind="if: initComplete">
                 <div class="row" data-bind="if: selectedEmail() && thisUsersSkis().length">
-                    here's what you thought of the skis duh
-                    <div data-bind="foreach: thisUsersSkis">
-                        <div data-bind="text: $data"></div>
-                        <div data-bind="foreach: Object.keys($root.skisByAttribute()[$data])">
-                            <div data-bind="text: $data"></div>
-                            <div data-bind="text: $root.skisByAttribute()[$parent][$data]"></div>
+                    Here's what you rated all the skis!
+                    <div class="skiWrapper" data-bind="foreach: thisUsersSkis">
+                        <div class="ski">
+                            <div class="skiTitle" data-bind="text: $data"></div>
+                            <div class="skiAttrWrapper"
+                                data-bind="foreach: Object.keys($root.skisByAttribute()[$data])">
+                                <div class="skiAttr">
+                                    <span data-bind="text: $data"></span>
+                                    <span data-bind="text: $root.skisByAttribute()[$parent][$data]"></span>
+                                </div>
+                            </div>
                         </div>
                     </div>
 

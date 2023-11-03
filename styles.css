@@ -1,3 +1,31 @@
+* {
+  font-family: "Futura PT", sans-serif !important;
+}
+
 .navbar-text {
   color: white;
+}
+
+.emailPicker,
+.skisByAttr,
+.welcome {
+  padding-top: 20px;
+}
+
+.ski {
+  border-top: 1px solid silver;
+  margin: 8px;
+  padding: 8px;
+}
+
+.skiTitle {
+  text-transform: uppercase;
+  font-size: 20px;
+}
+
+.skiAttrWrapper {
+}
+
+.skiAttr {
+  padding: 4px 8px;
 }
